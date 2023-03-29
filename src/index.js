@@ -3,7 +3,6 @@ import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 import API from './fetchCountries';
 
-
 const search = document.querySelector('#search-box');
 const countryCard = document.querySelector('.country-info');
 const countryList = document.querySelector('.country-list');
@@ -28,8 +27,7 @@ function onSearch(e) {
 }
 
 function onFetchError(error) {
-  countryCard.innerHTML = "";
-  countryList.innerHTML = "";
+  clearMarkup();
   Notiflix.Notify.failure(`❌ Oops, there is no country with that name`);
 };
 
@@ -43,8 +41,7 @@ function renderCountrys(country) {
   
   if (quantity > 10) {
     Notiflix.Notify.info(`Too many matches found. Please enter a more specific name.`);
-    countryCard.innerHTML = "";
-    countryList.innerHTML = "";    
+    clearMarkup();   
   }
   else if (quantity <= 1) {
     const markup = country
@@ -61,14 +58,14 @@ function renderCountrys(country) {
     countryList.innerHTML = "";
   }
   else {
-    const mark = country
+    const markDown = country
     .map(({ flags, name }) => {
       return `<p><svg width="24" height="24" viewBox="0 0 24 24">
   <image href="${flags.svg}" width="24" height="24"></image></svg>
   <span><b>${name.official}</b></span></p>`;
     })
     .join("");
-    countryList.innerHTML = mark;
+    countryList.innerHTML = markDown;
     countryCard.innerHTML = "";
   }
 }
