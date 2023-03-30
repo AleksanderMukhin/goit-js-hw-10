@@ -44,7 +44,15 @@ function renderCountrys(country) {
     clearMarkup();   
   }
   else if (quantity <= 1) {
-    const markup = country
+    renderCard(country);
+  }
+  else {
+    renderList(country);
+  }
+};
+
+function renderCard(country) {
+  const markup = country
     .map(({ capital, population, languages, flags, name }) => {
       return `<svg width="24" height="24" viewBox="0 0 24 24">
   <image href="${flags.svg}" width="24" height="24"></image></svg>
@@ -56,9 +64,10 @@ function renderCountrys(country) {
     .join("");
     countryCard.innerHTML = markup;
     countryList.innerHTML = "";
-  }
-  else {
-    const markDown = country
+};
+
+function renderList(country) {
+const markDown = country
     .map(({ flags, name }) => {
       return `<p><svg width="24" height="24" viewBox="0 0 24 24">
   <image href="${flags.svg}" width="24" height="24"></image></svg>
@@ -66,6 +75,5 @@ function renderCountrys(country) {
     })
     .join("");
     countryList.innerHTML = markDown;
-    countryCard.innerHTML = "";
-  }
+  countryCard.innerHTML = "";
 }
