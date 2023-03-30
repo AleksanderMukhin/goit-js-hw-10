@@ -59,9 +59,9 @@ function renderCard(country) {
   <span><b>${name.official}</b></span>
       <p><b>Capital</b>: ${capital}</p>
       <p><b>Population</b>: ${population}</p>
-      <p><b>Languages</b>: ${Object.values(languages)}</p>`;
+      <p><b>Languages</b>: ${Object.values(languages).join(", ")}</p>`;
     })
-    .join("");
+    .join(" ");
     countryCard.innerHTML = markup;
     countryList.innerHTML = "";
 };
